@@ -32,7 +32,7 @@ import 'prismjs/components/prism-json.js';
 
 
 const BlogPage = ({ blog }: { blog: IBlog }) => {
-  
+
   const [name, setName] = useState<string>('');
   const [message, setMessage] = useState<string>('');
   const [comments, setComments] = useState<IComment[]>(blog.comments)
@@ -81,9 +81,6 @@ const BlogPage = ({ blog }: { blog: IBlog }) => {
 
       })
     })
-
-    Prism.highlightAll()
-    processHtml()
   }, [])
 
   const processHtml = async () => {
@@ -97,7 +94,10 @@ const BlogPage = ({ blog }: { blog: IBlog }) => {
     setProcessedHtml(processedHtmlString)
   }
 
-
+  useEffect(() => {
+    Prism.highlightAll()
+    processHtml()
+  }, [processHtml])
 
 
   return (
